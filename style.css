@@ -1,0 +1,32 @@
+/* card container */
+
+#card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+}
+
+/* magic card */
+
+.mtg-card {
+    width: 260px;
+    padding: 15px;
+    background_color: #242831;
+    color: white;
+    border-radius: 12px;
+}
+
+.mtg-card img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.mtg-card h3 {
+    margin: 15px 0;
+}
+
+.mtg-card p {
+    font-size: 14px;
+    margin: 8px 0;
+}
