@@ -31,12 +31,56 @@
             <h2>Discover Magic: The Gathering</h2>
 
             <form id="search-form">
+                
                 <input
                         type="search"
                         id="card-search"
                         placeholder="Search for a card..."
-                        required
                 >
+
+            <label for="set-filter">Expansion</label>
+
+            <select id="set-filter">
+                <option value="">All expansions</option>
+            </select>
+
+            <label for="color-filter">Colour Identity</label>
+
+        <select id="color-filter">
+            <option value="">All colours</option>
+            <option value="w">White</option>
+            <option value="u">Blue</option>
+            <option value="b">Black</option>
+            <option value="r">Red</option>
+            <option value="g">Green</option>
+            <option value="c">Colourless</option>
+            <option value="m">Multicoloured</option>
+        </select>
+
+        <label for="type-filter">Card type</label>
+
+        <select id="type-filter">
+            <option value="">All types</option>
+            <option value="creature">Creature</option>
+            <option value="artifact">Artifact</option>
+            <option value="enchantment">Enchantment</option>
+            <option value="instant">Instant</option>
+            <option value="sorcery">Sorcery</option>
+            <option value="planeswalker">Planeswalker</option>
+            <option value="battle">Battle</option>
+            <option value="land">Land</option>
+        </select>
+
+        <label for="rarity-filter">Rarity</label>
+
+        <select id="rarity-filter">
+            <option value="">All rarities</option>
+            <option value="common">Common</option>
+            <option value="uncommon">Uncommon</option>
+            <option value="rare">Rare</option>
+            <option value="mythic">Mythic Rare</option>
+        </select>
+
 
                 <button type="submit">Search</button>
             </form>
