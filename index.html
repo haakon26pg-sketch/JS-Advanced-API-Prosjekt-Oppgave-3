@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="style.css">
+    <title>Commander Zone | MTG Card Builder</title>
+</head>
+<body>
+    
+    <header>
+        <div class="logo">
+            <h1>Commadner Zone</h1>
+            <p>Your place for deckbuilding and card stats.</p>
+        </div>
+
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">Card Browser</a>
+            <a href="#">Commanders</a>
+            <a href="#">Deck Builders</a>
+            <a href="#">My Decks</a>
+        </nav>
+    </header>
+
+    <main>
+
+        <section class="search-section">
+
+            <h2>Discover Magic: The Gathering</h2>
+
+            <form id="searchform">
+                <input
+                        type="search"
+                        id="card-search"
+                        placeholder="Search for a card..."
+                        required
+                >
+
+                <button type="submit">Search</button>
+            </form>
+
+            <button id="random-card">Random Card</button>
+
+        </section>
+
+        <section class="results-section">
+
+            <h2>Card Results</h2>
+
+            <div id="card-container"></div>
+
+        </section>
+
+    </main>
+
+    <footer>
+        <p>Commander Zone | Powered by Scryfall API</p>
+        <p>Unofficial Magic: The Gathering fan project</p>
+    </footer>
+
+</body>
+</html>
