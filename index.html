@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="script.js" defer></script>
     <link rel="stylesheet" href="style.css">
-    <title>Commander Zone | MTG Card Builder</title>
+    <title>Commanders Arsenal | MTG Card Builder</title>
 </head>
 <body>
     
     <header>
         <div class="logo">
-            <h1>Commander Zone</h1>
+            <h1>Commanders Arsenal</h1>
             <p>Your place for deckbuilding and card stats.</p>
         </div>
 
@@ -81,8 +81,31 @@
             <option value="mythic">Mythic Rare</option>
         </select>
 
+        <label for="sort-filter">Sort by</label>
 
-                <button type="submit">Search</button>
+<select id="sort-filter">
+    <option value="name">Card name</option>
+    <option value="eur">Price (EUR)</option>
+    <option value="cmc">Mana value</option>
+    <option value="rarity">Rarity</option>
+    <option value="released">Release date</option>
+    <option value="edhrec">Commander popularity</option>
+</select>
+
+<label for="direction-filter">Sort direction</label>
+
+<select id="direction-filter">
+    <option value="asc">Ascending</option>
+    <option value="desc">Descending</option>
+</select>
+
+
+            <button type="submit">Search</button>
+
+            <button type="reset" id="reset-filters">Reset filters
+            
+            </button>
+
             </form>
 
             <button id="random-card">Random Card</button>
@@ -93,6 +116,8 @@
 
             <h2>Card Results</h2>
 
+            <p id="result-counter">No search performed.</p>
+
             <div id="card-container"></div>
 
         </section>
@@ -100,7 +125,7 @@
     </main>
 
     <footer>
-        <p>Commander Zone | Powered by Scryfall API</p>
+        <p>Commanders Arsenal | Powered by Scryfall API</p>
         <p>Unofficial Magic: The Gathering fan project</p>
     </footer>
 

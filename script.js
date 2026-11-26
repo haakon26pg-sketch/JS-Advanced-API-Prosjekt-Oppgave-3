@@ -8,6 +8,9 @@ const setFilter = document.querySelector("#set-filter");
 const colorFilter = document.querySelector("#color-filter");
 const typeFilter = document.querySelector("#type-filter");
 const rarityFilter = document.querySelector("#rarity-filter");
+const sortFilter = document.querySelector("#sort-filter");
+const directionFilter = document.querySelector("#direction-filter");
+const resultCounter = document.querySelector("#result-counter");
 
 
 // fetch random cards
@@ -27,6 +30,8 @@ async function getRandomCard () {
         cardContainer.innerHTML = "";
         
         displayCard(card);
+
+        resultCounter.textContent = "Showing 1 random card";
         
         console.log(card);
         
@@ -75,12 +80,19 @@ async function searchCards(event) {
 
     console.log("Search query:", searchQuery);
 
-    let nextPage = `${API_URL}/cards/search?q=${encodeURIComponent(searchQuery)}`;
+    const selectedSort = sortFilter.value;
+    const selectedDirection = directionFilter.value;
+
+    let nextPage = `${API_URL}/cards/search?q=${encodeURIComponent(searchQuery)}&order=${selectedSort}&dir=${selectedDirection}`;
 
     let pageCount = 0;
     const maxPages = 3;
 
+    let loadedCards = 0;
+    let totalCards = 0;
+
     cardContainer.innerHTML = "";
+    resultCounter. textContent = "Loading cards...";
 
     try {
 
@@ -90,6 +102,7 @@ async function searchCards(event) {
 
             if (response.status === 404) {
                 cardContainer.textContent = "No cards found.";
+                resultCounter.textContent = "0 cards found";
                 return;
             }
 
@@ -101,12 +114,18 @@ async function searchCards(event) {
 
             pageCount++;
 
+            totalCards = result.total_cards;
+            loadedCards += result.data.length;
+
             console.log(`Page ${pageCount} received`);
             console.log(result);
 
             result.data.forEach(card => {
                 displayCard(card);
             });
+
+            resultCounter.textContent =
+            `Showing ${loadedCards} of ${totalCards} cards`;
 
             if (result.has_more) {
                 nextPage = result.next_page;
@@ -125,6 +144,7 @@ async function searchCards(event) {
 
         console.error(error);
         cardContainer.textContent = "Could not retrieve cards.";
+        resultCounter.textContent = "Search failed";
 
     }
 
@@ -169,10 +189,21 @@ async function getSets() {
 
 }
 
+// reset search filters
+
+function resetFilters() {
+    
+    cardContainer.innerHTML = "";
+
+    resultCounter.textContent = "No search performed";
+
+}
+
 // event listener 
 
 randomButton.addEventListener("click", getRandomCard);
 searchForm.addEventListener("submit", searchCards);
+searchForm.addEventListener("reset", resetFilters);
 
 // display card
 
