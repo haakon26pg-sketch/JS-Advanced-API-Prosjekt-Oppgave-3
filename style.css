@@ -1,32 +1,102 @@
-/* card container */
+/* Global CSS stylesheet */
 
-#card-container {
+:root {
+
+    /* fonts */
+
+    --font-heading: "Cinzel", serif;
+    --font-body: "Marcellus", serif;
+
+    /* background Colours */
+
+    --bg-main: #110B19;
+    --bg-secondary: #21152E;
+    --bg-elevated: #381650;
+
+    /* brand Colours */
+
+    --brand-purple: #8326C9;
+    --brand-gold: #F2BC42;
+    --brand-gold-light: #FFE29A;
+
+    /* text colours */
+
+    --text-main: #F8F3EA;
+    --text-muted: #B8A9C8;
+
+    /* borders */
+
+    --border-soft: #493459;
+    --border-gold: #A87F2C;
+
+}
+
+/* global reset */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* website background */
+
+body {
+    font-family: var(--font-body);
+    background: radial-gradient(
+        ellipse at top,
+        #271337 0%,
+        var(--bg-main) 65%
+    );
+    background-attachment: fixed;
+    color: var(--text-main);
+    min-height: 100vh;
     display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    padding: 20px;
+    flex-direction: column;
 }
 
-/* magic card */
+/* typography */
 
-.mtg-card {
-    width: 260px;
-    padding: 15px;
-    background_color: #242831;
-    color: white;
-    border-radius: 12px;
+h1, h2 {
+    font-family: var(--font-heading);
+    color: var(--brand-gold-light);
+    font-weight: 700;
 }
 
-.mtg-card img {
-    width: 100%;
-    border-radius: 10px;
+h3 {
+    font-family: var(--font-body);
+    font-weight: 400;
 }
 
-.mtg-card h3 {
-    margin: 15px 0;
+/* header design */
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+    padding: 20px 5%;
+    background-color: linear-gradient(
+        180deg,
+        var(--bg-secondary),
+        var(--bg-main)
+    );
+    border-bottom: 1px solid var(--border-gold);
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.35);
 }
 
-.mtg-card p {
-    font-size: 14px;
-    margin: 8px 0;
+/* website logo */
+
+.logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logo img {
+    display: block;
+    width: 300px;
+    max-width: 100%;
+    height: auto;
+    transition: filter 0.3s ease;
 }

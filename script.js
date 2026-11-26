@@ -11,36 +11,74 @@ const rarityFilter = document.querySelector("#rarity-filter");
 const sortFilter = document.querySelector("#sort-filter");
 const directionFilter = document.querySelector("#direction-filter");
 const resultCounter = document.querySelector("#result-counter");
+const searchButton = searchForm.querySelector(`button[type="submit"]`);
+const resetButton = document.querySelector("#reset-filters");
+
+// loading state
+
+let isLoading = false;
+
+// manage loading state
+
+function setLoading(loading) {
+
+    isLoading = loading;
+
+    searchButton.disabled = loading;
+    randomButton.disabled = loading;
+    resetButton.disabled = loading;
+
+    searchButton.textContent = loading
+    ? "Loading..."
+    : "Search";
+
+cardContainer.setAttribute("aria-busy", loading);
+
+}
 
 
 // fetch random cards
 
-async function getRandomCard () {
-    
+async function getRandomCard() {
+
+    if (isLoading) {
+        return;
+    }
+
+    setLoading(true);
+
+    resultCounter.textContent = "Loading random card...";
+
     try {
-        
-        const response = await fetch (`${API_URL}/cards/random`);
-        
+
+        const response = await fetch(`${API_URL}/cards/random`);
+
         if (!response.ok) {
             throw new Error("Could not retrieve card");
         }
-        
-        const card = await response.json()
+
+        const card = await response.json();
 
         cardContainer.innerHTML = "";
-        
+
         displayCard(card);
 
         resultCounter.textContent = "Showing 1 random card";
-        
+
         console.log(card);
-        
-        
+
     } catch (error) {
-        
+
         console.error(error);
+
+        resultCounter.textContent = "Could not retrieve card.";
+
+    } finally {
+
+        setLoading(false);
+
     }
-    
+
 }
 
 // search cards with pagination
@@ -48,6 +86,10 @@ async function getRandomCard () {
 async function searchCards(event) {
 
     event.preventDefault();
+
+    if (isLoading) {
+        return;
+    }
 
     let searchQuery = cardSearch.value.trim();
 
@@ -93,6 +135,8 @@ async function searchCards(event) {
 
     cardContainer.innerHTML = "";
     resultCounter. textContent = "Loading cards...";
+
+    setLoading(true);
 
     try {
 
@@ -146,7 +190,13 @@ async function searchCards(event) {
         cardContainer.textContent = "Could not retrieve cards.";
         resultCounter.textContent = "Search failed";
 
+    } finally {
+
+
+        setLoading(false);
+
     }
+
 
 }
 
