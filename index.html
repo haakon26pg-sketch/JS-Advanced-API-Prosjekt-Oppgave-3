@@ -1,139 +1,443 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Commanders Arsenal | MTG Card Builder</title>
 
+    <!-- favicon -->
+
     <link rel="icon" type="image/png" href="images/favicon.png">
 
-    <!-- Google Fonts -->
+    <!-- google fonts -->
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800&family=Marcellus&display=swap" rel="stylesheet">
 
-    <!-- Stylesheet and JavaScript -->
+    <!-- stylesheet and javascript -->
 
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
+
 </head>
+
 <body>
-<header>
 
-    <div class="logo">
+    <!-- website header -->
 
-        <a href="index.html">
-            <img src="images/logo.png" alt="Commanders Arsenal">
-        </a>
+    <header class="site-header">
 
-        <p>Your place for deckbuilding and card stats.</p>
+        <div class="logo">
 
-    </div>
+            <a href="index.html">
+                <img src="images/logo.png" alt="Commanders Arsenal">
+            </a>
 
-    <nav>
-        <a href="#">Home</a>
-        <a href="#" class="active">Card Browser</a>
-        <a href="#">Commanders</a>
-        <a href="#">Deck Builder</a>
-        <a href="#">My Decks</a>
-    </nav>
+            <p>Your place for deckbuilding and card stats.</p>
 
-</header>
+        </div>
+
+        <!-- decorative divider -->
+
+        <div class="header-decoration" aria-hidden="true">
+            <span>✦</span>
+        </div>
+
+        <!-- main navigation -->
+
+        <nav class="main-nav" aria-label="Main navigation">
+
+            <a href="#">Home</a>
+
+            <a href="#" class="active" aria-current="page">
+                Card Browser
+            </a>
+
+            <a href="#">Commanders</a>
+            <a href="#">Deck Builder</a>
+            <a href="#">My Decks</a>
+
+        </nav>
+
+    </header>
+
+    <!-- main content -->
 
     <main>
 
+        <!-- search section -->
+
         <section class="search-section">
 
-            <h2>Discover Magic: The Gathering</h2>
+            <!-- search introduction -->
+
+            <div class="search-intro">
+
+                <span class="section-eyebrow">
+                    Explore the Multiverse
+                </span>
+
+                <h1>Discover Your Arsenal</h1>
+
+                <p>
+                    Explore legendary creatures, powerful spells
+                    and hidden treasures.
+                </p>
+
+            </div>
+
+            <!-- search form -->
 
             <form id="search-form">
-                
-                <input
+
+                <!-- search bar -->
+
+                <div class="search-bar">
+
+                    <input
                         type="search"
                         id="card-search"
-                        placeholder="Search for a card..."
-                >
+                        placeholder="Search for a Magic card..."
+                        aria-label="Search for a Magic card"
+                    >
 
-            <label for="set-filter">Expansion</label>
+                </div>
 
-            <select id="set-filter">
-                <option value="">All expansions</option>
-            </select>
+                <!-- mana colour selection -->
 
-            <label for="color-filter">Colour Identity</label>
+                <div class="mana-selection">
 
-        <select id="color-filter">
-            <option value="">All colours</option>
-            <option value="w">White</option>
-            <option value="u">Blue</option>
-            <option value="b">Black</option>
-            <option value="r">Red</option>
-            <option value="g">Green</option>
-            <option value="c">Colourless</option>
-            <option value="m">Multicoloured</option>
-        </select>
+                    <p id="mana-label">Colour identity</p>
 
-        <label for="type-filter">Card type</label>
+                    <div class="mana-options"
+                         role="group"
+                         aria-labelledby="mana-label">
 
-        <select id="type-filter">
-            <option value="">All types</option>
-            <option value="creature">Creature</option>
-            <option value="artifact">Artifact</option>
-            <option value="enchantment">Enchantment</option>
-            <option value="instant">Instant</option>
-            <option value="sorcery">Sorcery</option>
-            <option value="planeswalker">Planeswalker</option>
-            <option value="battle">Battle</option>
-            <option value="land">Land</option>
-        </select>
+                        <!-- white mana -->
 
-        <label for="rarity-filter">Rarity</label>
+                        <button type="button"
+                                class="mana-button"
+                                data-color="w"
+                                aria-pressed="false"
+                                title="White">
 
-        <select id="rarity-filter">
-            <option value="">All rarities</option>
-            <option value="common">Common</option>
-            <option value="uncommon">Uncommon</option>
-            <option value="rare">Rare</option>
-            <option value="mythic">Mythic Rare</option>
-        </select>
+                            <img
+                                src="https://svgs.scryfall.io/card-symbols/W.svg"
+                                alt="White"
+                            >
 
-        <label for="sort-filter">Sort by</label>
+                        </button>
 
-<select id="sort-filter">
-    <option value="name">Card name</option>
-    <option value="eur">Price (EUR)</option>
-    <option value="cmc">Mana value</option>
-    <option value="rarity">Rarity</option>
-    <option value="released">Release date</option>
-    <option value="edhrec">Commander popularity</option>
-</select>
+                        <!-- blue mana -->
 
-<label for="direction-filter">Sort direction</label>
+                        <button type="button"
+                                class="mana-button"
+                                data-color="u"
+                                aria-pressed="false"
+                                title="Blue">
 
-<select id="direction-filter">
-    <option value="asc">Ascending</option>
-    <option value="desc">Descending</option>
-</select>
+                            <img
+                                src="https://svgs.scryfall.io/card-symbols/U.svg"
+                                alt="Blue"
+                            >
 
+                        </button>
 
-            <button type="submit">Search</button>
+                        <!-- black mana -->
 
-            <button type="reset" id="reset-filters">Reset filters
-            
-            </button>
+                        <button type="button"
+                                class="mana-button"
+                                data-color="b"
+                                aria-pressed="false"
+                                title="Black">
+
+                            <img
+                                src="https://svgs.scryfall.io/card-symbols/B.svg"
+                                alt="Black"
+                            >
+
+                        </button>
+
+                        <!-- red mana -->
+
+                        <button type="button"
+                                class="mana-button"
+                                data-color="r"
+                                aria-pressed="false"
+                                title="Red">
+
+                            <img
+                                src="https://svgs.scryfall.io/card-symbols/R.svg"
+                                alt="Red"
+                            >
+
+                        </button>
+
+                        <!-- green mana -->
+
+                        <button type="button"
+                                class="mana-button"
+                                data-color="g"
+                                aria-pressed="false"
+                                title="Green">
+
+                            <img
+                                src="https://svgs.scryfall.io/card-symbols/G.svg"
+                                alt="Green"
+                            >
+
+                        </button>
+
+                        <!-- colourless mana -->
+
+                        <button type="button"
+                                class="mana-button"
+                                data-color="c"
+                                aria-pressed="false"
+                                title="Colourless">
+
+                            <img
+                                src="https://svgs.scryfall.io/card-symbols/C.svg"
+                                alt="Colourless"
+                            >
+
+                        </button>
+
+                    </div>
+
+                    <!-- mana action buttons -->
+
+                    <div class="mana-actions">
+
+                        <button type="button"
+                                class="mana-multicolor"
+                                data-color="m"
+                                aria-pressed="false">
+
+                            Any multicoloured
+
+                        </button>
+
+                        <button type="button" id="clear-colors">
+
+                            Clear selection
+
+                        </button>
+
+                    </div>
+
+                    <!-- selected colour identity -->
+
+                    <p id="selected-identity" aria-live="polite">
+                        All colours
+                    </p>
+
+                    <!-- hidden input for search functionality -->
+
+                    <input type="hidden" id="color-filter" value="">
+
+                </div>
+
+                <!-- advanced search filters -->
+
+                <details class="advanced-filters" open>
+
+                    <summary>Advanced search filters</summary>
+
+                    <div class="filter-grid">
+
+                        <!-- expansion filter -->
+
+                        <div class="filter-group">
+
+                            <label for="set-filter">Expansion</label>
+
+                            <select id="set-filter">
+                                <option value="">All expansions</option>
+                            </select>
+
+                        </div>
+
+                        <!-- card type filter -->
+
+                        <div class="filter-group">
+
+                            <label for="type-filter">Card type</label>
+
+                            <select id="type-filter">
+
+                                <option value="">All types</option>
+
+                                <optgroup label="Standard card types">
+
+                                    <option value="creature">Creature</option>
+                                    <option value="artifact">Artifact</option>
+                                    <option value="enchantment">Enchantment</option>
+                                    <option value="instant">Instant</option>
+                                    <option value="sorcery">Sorcery</option>
+                                    <option value="planeswalker">Planeswalker</option>
+                                    <option value="battle">Battle</option>
+                                    <option value="land">Land</option>
+                                    <option value="kindred">Kindred</option>
+
+                                </optgroup>
+
+                                <optgroup label="Legendary card types">
+
+                                    <option value="legendary">
+                                        All legendary cards
+                                    </option>
+
+                                    <option value="legendary t:creature">
+                                        Legendary Creature
+                                    </option>
+
+                                    <option value="legendary t:artifact">
+                                        Legendary Artifact
+                                    </option>
+
+                                    <option value="legendary t:enchantment">
+                                        Legendary Enchantment
+                                    </option>
+
+                                    <option value="legendary t:planeswalker">
+                                        Legendary Planeswalker
+                                    </option>
+
+                                    <option value="legendary t:land">
+                                        Legendary Land
+                                    </option>
+
+                                    <option value="legendary t:sorcery">
+                                        Legendary Sorcery
+                                    </option>
+
+                                </optgroup>
+
+                                <optgroup label="Special card types">
+
+                                    <option value="artifact t:creature">
+                                        Artifact Creature
+                                    </option>
+
+                                    <option value="enchantment t:creature">
+                                        Enchantment Creature
+                                    </option>
+
+                                    <option value="equipment">Equipment</option>
+                                    <option value="vehicle">Vehicle</option>
+                                    <option value="aura">Aura</option>
+                                    <option value="saga">Saga</option>
+                                    <option value="background">Background</option>
+                                    <option value="snow">Snow</option>
+
+                                    <option value="basic t:land">
+                                        Basic Land
+                                    </option>
+
+                                </optgroup>
+
+                            </select>
+
+                        </div>
+
+                        <!-- rarity filter -->
+
+                        <div class="filter-group">
+
+                            <label for="rarity-filter">Rarity</label>
+
+                            <select id="rarity-filter">
+
+                                <option value="">All rarities</option>
+                                <option value="common">Common</option>
+                                <option value="uncommon">Uncommon</option>
+                                <option value="rare">Rare</option>
+                                <option value="mythic">Mythic Rare</option>
+
+                            </select>
+
+                        </div>
+
+                        <!-- sorting filter -->
+
+                        <div class="filter-group">
+
+                            <label for="sort-filter">Sort by</label>
+
+                            <select id="sort-filter">
+
+                                <option value="name">Card name</option>
+                                <option value="eur">Price (EUR)</option>
+                                <option value="cmc">Mana value</option>
+                                <option value="rarity">Rarity</option>
+                                <option value="released">Release date</option>
+                                <option value="edhrec">Commander popularity</option>
+
+                            </select>
+
+                        </div>
+
+                        <!-- sorting direction -->
+
+                        <div class="filter-group">
+
+                            <label for="direction-filter">
+                                Sort direction
+                            </label>
+
+                            <select id="direction-filter">
+
+                                <option value="asc">Ascending</option>
+                                <option value="desc">Descending</option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                </details>
+
+                <!-- search action buttons -->
+
+                <div class="search-actions">
+
+                    <button type="submit" class="primary-button">
+                        Search
+                    </button>
+
+                    <button type="reset" id="reset-filters">
+                        Reset filters
+                    </button>
+
+                    <button type="button" id="random-card">
+                        Random Card
+                    </button>
+
+                </div>
 
             </form>
 
-            <button id="random-card">Random Card</button>
-
         </section>
+
+        <!-- card results section -->
 
         <section class="results-section">
 
             <h2>Card Results</h2>
 
-            <p id="result-counter">No search performed.</p>
+            <p id="result-counter" aria-live="polite">
+                No search performed.
+            </p>
+
+            <!-- dynamically generated cards -->
 
             <div id="card-container"></div>
 
@@ -141,10 +445,16 @@
 
     </main>
 
+    <!-- website footer -->
+
     <footer>
+
         <p>Commanders Arsenal | Powered by Scryfall API</p>
+
         <p>Unofficial Magic: The Gathering fan project</p>
+
     </footer>
 
 </body>
+
 </html>

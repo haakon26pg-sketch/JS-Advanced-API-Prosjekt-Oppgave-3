@@ -13,6 +13,25 @@ const directionFilter = document.querySelector("#direction-filter");
 const resultCounter = document.querySelector("#result-counter");
 const searchButton = searchForm.querySelector(`button[type="submit"]`);
 const resetButton = document.querySelector("#reset-filters");
+const manabuttons = document.querySelectorAll("[data-color]");
+const clearColorsButton = document.querySelector("#clear-colors");
+const selectedIdentity = document.querySelector("#selected-identity");
+
+// mana colour data
+
+let selectedColors = [];
+
+const colorOrder = ["w", "u", "b", "r", "g"];
+
+const colorNames = {
+    w: "White",
+    u: "Blue",
+    b: "Black",
+    r: "Red",
+    g: "Green",
+    c: "Colourless",
+    m: "Any multicoloured"
+};
 
 // loading state
 
@@ -102,9 +121,21 @@ async function searchCards(event) {
         searchQuery += ` set:${selectedSet}`;
     }
 
-    if (selectedColor) {
-        searchQuery += ` id=${selectedColor}`;
+// apply colour identity filter
+
+    if (selectedColor === "m") {
+
+        searchQuery += " id: m";
+    
+    } else if (selectedColor === "c") {
+
+        searchQuery += "id:c";
+
+    } else if (selectedColor) {
+
+        searchQuery += `id=${selectedColor}`;;
     }
+
 
     if (selectedType) {
         searchQuery += ` t:${selectedType}`;
@@ -280,6 +311,88 @@ function displayCard(card) {
     cardContainer.appendChild(cardElement);
     
 }
+
+// update mana selection
+
+function updateManaSelection () {
+
+    manabuttons.forEach(button => {
+
+        const color = button.dataset.color;
+        const isSelected = selectedColors.includes(color);
+
+        button.classList.toggle("active", isSelected);
+
+        button.setAttribute("aria-pressed", isSelected);
+    });
+
+    if (selectedColors.includes("c")) {
+
+        colorFilter.value = "c";
+    } else if (selectedColors.includes("m")) {
+
+        colorFilter.value = "m";
+    } else {
+
+        colorFilter.value = colorOrder
+        .filter(color => selectedColors.includes(color))
+        .join("");
+    }
+
+    selectedIdentity.textContent = selectedColors.length
+    ? selectedColors.map(color => colorNames[color]).join(" + ")
+    : "All colours";
+
+}
+
+
+// handle mana button clicks
+
+manabuttons.forEach(button => {
+
+    button.addEventListener("click", () => {
+
+        const color = button.dataset.color;
+
+        if (isLoading) return;
+
+        if (selectedColors.includes(color)) {
+
+            selectedColors = selectedColors.filter(
+                selected => selected !== color
+            );
+        } else if (color === "c" || color === "m") {
+
+            selectedColors = [color];
+
+        } else {
+
+            selectedColors = selectedColors.filter(
+                selected => selected !== "c" && selected !== "m"
+            );
+
+            selectedColors.push(color);
+        }
+
+        updateManaSelection();
+    
+    });
+});
+
+// clear selected mana colours
+
+function resetManaSelection() {
+
+    selectedColors = [];
+    updateManaSelection();
+}
+
+clearColorsButton.addEventListener("click", () => {
+
+    if (isLoading) return;
+
+    resetManaSelection
+});
 
 // initial API requests
 
